@@ -1,1 +1,9 @@
-<p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati quam iste tempore odio nisi voluptatibus fugit necessitatibus, laboriosam dicta repellat dolorem velit possimus corporis, vitae delectus, labore inventore est dolore.</p>
+<div class="row">
+
+{% for post in posts %}
+	<h2>{{post.title}}</h2>
+	<img src="{{post.thumbnail}}" alt="" srcset="">
+	<p>{{post.content|raw}}</p>
+	
+{% endfor %}
+</div>

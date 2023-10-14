@@ -33,11 +33,34 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
  protected function register_controls()
  {
 
+// Get all post types
+  $post_types           = get_post_types(array(), 'objects');
+  $available_post_types = [];
+// Filter out post types without the 'post' capability
+  $filtered_post_types = array_filter($post_types, function ($post_type) {
+   return post_type_supports($post_type->name, 'editor'); // Check if the post type supports the 'editor' capability
+  });
+
+// Output the list of post types
+  foreach ($filtered_post_types as $post_type) {
+   $available_post_types[$post_type->name] = $post_type->label;
+  }
+
   $this->start_controls_section(
    'content_section',
    [
     'label' => esc_html__('Content', 'ilali-postfilter'),
     'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
+   ]
+  );
+
+  $this->add_control(
+   'post_type',
+   [
+    'label'   => esc_html__('Post Type', 'ilali-postfilter'),
+    'type'    => \Elementor\Controls_Manager::SELECT,
+    'default' => 'solid',
+    'options' => $available_post_types,
    ]
   );
 
@@ -94,11 +117,31 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   global $twig;
   global $wpdb;
 
-  $gallery  = [];
-  $settings = $this->get_settings_for_display();
-
+  $settings             = $this->get_settings_for_display();
   $context['widget_id'] = str_replace(".", "", $this->get_unique_selector());
   $context['settings']  = $settings;
+
+  // WP Query
+  $context['posts'] = [];
+  $query            = new WP_Query([
+   'post_type'      => $settings['post_type'],
+   'posts_per_page' => 6,
+   'status'         => 'publish',
+  ]);
+
+  if ($query->have_posts()) {
+   while ($query->have_posts()): $query->the_post();
+    $context['posts'][] = [
+     'title'        => get_the_title(),
+     'link'         => get_the_permalink(),
+     'thumbnail'    => get_the_post_thumbnail_url(),
+     'category'     => wp_get_post_terms(get_the_ID(), 'category')[0]->name,
+     'categorySlug' => wp_get_post_terms(get_the_ID(), 'category')[0]->slug,
+     'content'      => get_the_excerpt(),
+     'date'         => get_the_date('j F Y'),
+    ];
+   endwhile;
+  }
 
   echo $twig->render('post-grid.twig', $context);
  }
