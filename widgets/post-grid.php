@@ -56,12 +56,47 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   );
 
   $this->add_control(
+   'query',
+   [
+    'label' => esc_html__('Query', 'ilali-postfilter'),
+    'type'  => \Elementor\Controls_Manager::HEADING,
+   ]
+  );
+
+  $this->add_control(
    'post_type',
    [
     'label'   => esc_html__('Post Type', 'ilali-postfilter'),
     'type'    => \Elementor\Controls_Manager::SELECT,
     'default' => 'solid',
     'options' => $available_post_types,
+   ]
+  );
+
+  $this->add_control(
+   'posts_per_page',
+   [
+    'label'   => esc_html__('Posts per page', 'textdomain'),
+    'type'    => \Elementor\Controls_Manager::NUMBER,
+    'min'     => 1,
+    'max'     => 12,
+    'step'    => 1,
+    'default' => 6,
+   ]
+  );
+
+  $this->add_control(
+   'hr',
+   [
+    'type' => \Elementor\Controls_Manager::DIVIDER,
+   ]
+  );
+
+  $this->add_control(
+   'settings',
+   [
+    'label' => esc_html__('Settings', 'ilali-postfilter'),
+    'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
 
@@ -94,7 +129,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'title_styling',
    [
-    'label' => esc_html__('Title styling', 'ilali-postfilter'),
+    'label' => esc_html__('Title', 'ilali-postfilter'),
     'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
@@ -105,7 +140,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
     'label'     => esc_html__('Text Color', 'ilali-postfilter'),
     'type'      => \Elementor\Controls_Manager::COLOR,
     'selectors' => [
-     '{{WRAPPER}} .text' => 'color: {{VALUE}};',
+     '{{WRAPPER}} .post-title' => 'color: {{VALUE}};',
     ],
    ]
   );
@@ -114,7 +149,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    \Elementor\Group_Control_Typography::get_type(),
    [
     'name'     => 'content_typography',
-    'selector' => '{{WRAPPER}} .text',
+    'selector' => '{{WRAPPER}} .post-title',
    ]
   );
 
@@ -142,7 +177,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   $context['posts'] = [];
   $query            = new WP_Query([
    'post_type'      => $settings['post_type'],
-   'posts_per_page' => 6,
+   'posts_per_page' => $settings['posts_per_page'],
    'status'         => 'publish',
   ]);
 
