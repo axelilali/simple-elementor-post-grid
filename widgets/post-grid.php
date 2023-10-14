@@ -1,10 +1,12 @@
 <?php
 // TODO:
-// add column padding
-// add pagination button and settings
-// add post taxonomies
-
+//  column padding
+//  pagination button and settings
+//  post taxonomies
+// thumbnail min height
+// column bottom margin for responsive
 require_once dirname(__DIR__) . '/bootstrap.php';
+require_once dirname(__DIR__) . '/helpers/truncate.php';
 
 class Ilali_PostGrid extends \Elementor\Widget_Base
 
@@ -100,6 +102,18 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
      'asc'  => 'ASC',
      'desc' => "DESC",
     ],
+   ]
+  );
+
+  $this->add_control(
+   'excerpt_length',
+   [
+    'label'   => esc_html__('Excerpt length', 'textdomain'),
+    'type'    => \Elementor\Controls_Manager::NUMBER,
+    'min'     => 5,
+    'max'     => 200,
+    'step'    => 5,
+    'default' => 20,
    ]
   );
 
@@ -208,7 +222,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
      'thumbnail'    => get_the_post_thumbnail_url(),
      'category'     => wp_get_post_terms(get_the_ID(), 'category')[0]->name,
      'categorySlug' => wp_get_post_terms(get_the_ID(), 'category')[0]->slug,
-     'content'      => get_the_excerpt(),
+     'content'      => limit_text(get_the_excerpt(), $settings['excerpt_length']),
      'date'         => get_the_date('j F Y'),
     ];
    endwhile;

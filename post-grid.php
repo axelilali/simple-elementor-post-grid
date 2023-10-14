@@ -1,4 +1,5 @@
 <?php
+// ini_set('display_errors', 1);
 /**
  * Plugin Name:     Elementor Post Grid
  * Plugin URI:      PLUGIN SITE HERE

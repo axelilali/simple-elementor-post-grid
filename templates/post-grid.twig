@@ -1,8 +1,9 @@
 <div class="row">
 {% for post in posts %}
-	<div class="col-md-{{settings.columns}}">
+	<div class="col-lg-{{settings.columns}}">
 		<img class="post-thumbnail" src="{{post.thumbnail}}" alt="" srcset="">
 		<a href="{{post.link}}"><h3 class="post-title">{{post.title}}</h3></a>
+		<span class="post-date">{{ post.date }}</span>
 		<p class="post-content">{{post.content|raw}}</p>
 	</div>
 {% endfor %}
