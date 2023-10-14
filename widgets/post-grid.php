@@ -46,6 +46,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    $available_post_types[$post_type->name] = $post_type->label;
   }
 
+  // CONTENT
   $this->start_controls_section(
    'content_section',
    [
@@ -64,8 +65,24 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    ]
   );
 
+  $this->add_control(
+   'columns',
+   [
+    'label'   => esc_html__('Grid columns', 'ilali-postfilter'),
+    'type'    => \Elementor\Controls_Manager::SELECT,
+    'default' => 'solid',
+    'options' => [
+     12 => 1,
+     6  => 2,
+     3  => 4,
+     4  => 3,
+    ],
+   ]
+  );
+
   $this->end_controls_section();
 
+  // STYLES
   $this->start_controls_section(
    'style_section',
    [
