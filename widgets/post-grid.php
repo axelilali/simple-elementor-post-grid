@@ -1,4 +1,9 @@
 <?php
+// TODO:
+// add column padding
+// add pagination button and settings
+// add post taxonomies
+
 require_once dirname(__DIR__) . '/bootstrap.php';
 
 class Ilali_PostGrid extends \Elementor\Widget_Base
@@ -68,7 +73,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    [
     'label'   => esc_html__('Post Type', 'ilali-postfilter'),
     'type'    => \Elementor\Controls_Manager::SELECT,
-    'default' => 'solid',
+    'default' => '',
     'options' => $available_post_types,
    ]
   );
@@ -82,6 +87,19 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
     'max'     => 12,
     'step'    => 1,
     'default' => 6,
+   ]
+  );
+
+  $this->add_control(
+   'posts_order',
+   [
+    'label'   => esc_html__('Post order', 'ilali-postfilter'),
+    'type'    => \Elementor\Controls_Manager::SELECT,
+    'default' => 'DESC',
+    'options' => [
+     'asc'  => 'ASC',
+     'desc' => "DESC",
+    ],
    ]
   );
 
@@ -105,7 +123,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    [
     'label'   => esc_html__('Grid columns', 'ilali-postfilter'),
     'type'    => \Elementor\Controls_Manager::SELECT,
-    'default' => 'solid',
+    'default' => 3,
     'options' => [
      12 => 1,
      6  => 2,
@@ -178,6 +196,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   $query            = new WP_Query([
    'post_type'      => $settings['post_type'],
    'posts_per_page' => $settings['posts_per_page'],
+   'order'          => $settings['posts_order'],
    'status'         => 'publish',
   ]);
 
