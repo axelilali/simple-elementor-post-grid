@@ -462,6 +462,79 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    ]
   );
 
+  $this->add_control(
+   'date_divider',
+   [
+    'type' => \Elementor\Controls_Manager::DIVIDER,
+   ]
+  );
+
+  $this->add_control(
+   'excerpt_styling',
+   [
+    'label' => esc_html__('Except', 'ilalipostfilter'),
+    'type'  => \Elementor\Controls_Manager::HEADING,
+   ]
+  );
+
+  $this->add_control(
+   'excerpt_color',
+   [
+    'label'     => esc_html__('Excerpt color', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::COLOR,
+    'selectors' => [
+     '{{WRAPPER}} .post-content' => 'color: {{VALUE}};',
+    ],
+   ]
+  );
+
+  $this->add_group_control(
+   \Elementor\Group_Control_Typography::get_type(),
+   [
+    'name'     => 'date_typography',
+    'selector' => '{{WRAPPER}} .post-content',
+   ]
+  );
+
+  $this->add_responsive_control(
+   'excerpt_align',
+   [
+    'label'     => esc_html__('Alignment', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::CHOOSE,
+    'options'   => [
+     'left'   => [
+      'title' => esc_html__('Left', 'ilalipostfilter'),
+      'icon'  => 'eicon-text-align-left',
+     ],
+     'center' => [
+      'title' => esc_html__('Center', 'ilalipostfilter'),
+      'icon'  => 'eicon-text-align-center',
+     ],
+     'right'  => [
+      'title' => esc_html__('Right', 'ilalipostfilter'),
+      'icon'  => 'eicon-text-align-right',
+     ],
+    ],
+    'default'   => 'left',
+    'toggle'    => true,
+    'selectors' => [
+     '{{WRAPPER}} .post-content' => 'text-align: {{VALUE}};',
+    ],
+   ]
+  );
+
+  $this->add_responsive_control(
+   'excerpt_margin',
+   [
+    'label'      => esc_html__('Margin', 'textdomain'),
+    'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+    'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+    'selectors'  => [
+     '{{WRAPPER}} .post-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+    ],
+   ]
+  );
+
   $this->end_controls_section();
 
  }
