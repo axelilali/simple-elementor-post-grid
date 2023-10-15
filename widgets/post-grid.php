@@ -377,10 +377,88 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    ]
   );
 
+  $this->add_responsive_control(
+   'title_margin',
+   [
+    'label'      => esc_html__('Margin', 'textdomain'),
+    'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+    'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+    'selectors'  => [
+     '{{WRAPPER}} .post-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+    ],
+   ]
+  );
+
   $this->add_control(
-   'hr',
+   'title_divider',
    [
     'type' => \Elementor\Controls_Manager::DIVIDER,
+   ]
+  );
+
+  $this->add_control(
+   'date_styling',
+   [
+    'label' => esc_html__('Date', 'ilalipostfilter'),
+    'type'  => \Elementor\Controls_Manager::HEADING,
+   ]
+  );
+
+  $this->add_control(
+   'date_color',
+   [
+    'label'     => esc_html__('Date color', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::COLOR,
+    'selectors' => [
+     '{{WRAPPER}} .post-date' => 'color: {{VALUE}};',
+    ],
+   ]
+  );
+
+  $this->add_group_control(
+   \Elementor\Group_Control_Typography::get_type(),
+   [
+    'name'     => 'date_typography',
+    'selector' => '{{WRAPPER}} .post-date',
+   ]
+  );
+
+  $this->add_responsive_control(
+   'date_align',
+   [
+    'label'     => esc_html__('Alignment', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::CHOOSE,
+    'options'   => [
+     'left'   => [
+      'title' => esc_html__('Left', 'ilalipostfilter'),
+      'icon'  => 'eicon-text-align-left',
+     ],
+     'center' => [
+      'title' => esc_html__('Center', 'ilalipostfilter'),
+      'icon'  => 'eicon-text-align-center',
+     ],
+     'right'  => [
+      'title' => esc_html__('Right', 'ilalipostfilter'),
+      'icon'  => 'eicon-text-align-right',
+     ],
+    ],
+    'default'   => 'left',
+    'toggle'    => true,
+    'selectors' => [
+     '{{WRAPPER}} .post-date' => 'text-align: {{VALUE}};',
+    ],
+   ]
+  );
+
+  $this->add_responsive_control(
+   'date_margin',
+   [
+    'label'      => esc_html__('Margin', 'textdomain'),
+    'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+    'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+    'selectors'  => [
+     '{{WRAPPER}} .post-date' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+    ],
    ]
   );
 
