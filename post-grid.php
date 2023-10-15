@@ -17,15 +17,13 @@
 function elementor_post_grid_widgets_dependencies()
 {
 
- wp_register_script('bootstrap', plugins_url('libs/bootstrap/bootstrap.min.js', __FILE__), [], 'all', true);
- wp_register_style('bootstrap', plugins_url('libs/bootstrap/bootstrap.min.css', __FILE__), null, 'all');
+ wp_register_style('bootstrap-grid', plugins_url('libs/bootstrap/bootstrap-grid.min.css', __FILE__), null, 'all');
 }
 add_action('wp_enqueue_scripts', 'elementor_post_grid_widgets_dependencies');
 
 function enqueue_style()
 {
- wp_enqueue_script('bootstrap');
- wp_enqueue_style('bootstrap');
+ wp_enqueue_style('bootstrap-grid');
 
 }
 add_action('wp_enqueue_scripts', 'enqueue_style');
