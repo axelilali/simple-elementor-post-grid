@@ -5,6 +5,9 @@
 //  post taxonomies
 // thumbnail min height
 // column bottom margin for responsive
+// global variable for text domaine
+// replace boostrap with css grid
+
 require_once dirname(__DIR__) . '/bootstrap.php';
 require_once dirname(__DIR__) . '/helpers/truncate.php';
 
@@ -29,7 +32,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
 
  public function get_categories()
  {
-  return ['eanet-addons'];
+  return ['basic'];
  }
 
  public function get_keywords()
@@ -57,7 +60,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   $this->start_controls_section(
    'content_section',
    [
-    'label' => esc_html__('Content', 'ilali-postfilter'),
+    'label' => esc_html__('Content', 'ilalipostfilter'),
     'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
    ]
   );
@@ -65,7 +68,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'query',
    [
-    'label' => esc_html__('Query', 'ilali-postfilter'),
+    'label' => esc_html__('Query', 'ilalipostfilter'),
     'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
@@ -73,7 +76,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'post_type',
    [
-    'label'   => esc_html__('Post Type', 'ilali-postfilter'),
+    'label'   => esc_html__('Source', 'ilalipostfilter'),
     'type'    => \Elementor\Controls_Manager::SELECT,
     'default' => '',
     'options' => $available_post_types,
@@ -83,7 +86,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'posts_per_page',
    [
-    'label'   => esc_html__('Posts per page', 'textdomain'),
+    'label'   => esc_html__('Posts per page', 'ilalipostfilter'),
     'type'    => \Elementor\Controls_Manager::NUMBER,
     'min'     => 1,
     'max'     => 12,
@@ -95,25 +98,13 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'posts_order',
    [
-    'label'   => esc_html__('Post order', 'ilali-postfilter'),
+    'label'   => esc_html__('Post order', 'ilalipostfilter'),
     'type'    => \Elementor\Controls_Manager::SELECT,
-    'default' => 'DESC',
+    'default' => 'desc',
     'options' => [
      'asc'  => 'ASC',
      'desc' => "DESC",
     ],
-   ]
-  );
-
-  $this->add_control(
-   'excerpt_length',
-   [
-    'label'   => esc_html__('Excerpt length', 'textdomain'),
-    'type'    => \Elementor\Controls_Manager::NUMBER,
-    'min'     => 5,
-    'max'     => 200,
-    'step'    => 5,
-    'default' => 20,
    ]
   );
 
@@ -127,7 +118,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'settings',
    [
-    'label' => esc_html__('Settings', 'ilali-postfilter'),
+    'label' => esc_html__('Settings', 'ilalipostfilter'),
     'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
@@ -135,7 +126,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'columns',
    [
-    'label'   => esc_html__('Grid columns', 'ilali-postfilter'),
+    'label'   => esc_html__('Grid columns', 'ilalipostfilter'),
     'type'    => \Elementor\Controls_Manager::SELECT,
     'default' => 3,
     'options' => [
@@ -147,21 +138,157 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    ]
   );
 
+  $this->add_control(
+   'excerpt_length',
+   [
+    'label'   => esc_html__('Excerpt length', 'ilalipostfilter'),
+    'type'    => \Elementor\Controls_Manager::NUMBER,
+    'min'     => 5,
+    'max'     => 200,
+    'step'    => 5,
+    'default' => 20,
+   ]
+  );
+
+  $this->add_control(
+   'hr_2',
+   [
+    'type' => \Elementor\Controls_Manager::DIVIDER,
+   ]
+  );
+
+  $this->add_control(
+   'show_thumbnail',
+   [
+    'label'        => esc_html__('Show thumbnail', 'ilalipostfilter'),
+    'type'         => \Elementor\Controls_Manager::SWITCHER,
+    'label_on'     => esc_html__('Show', 'ilalipostfilter'),
+    'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
+    'return_value' => 'yes',
+    'default'      => 'yes',
+   ]
+  );
+
+  $this->add_control(
+   'show_title',
+   [
+    'label'        => esc_html__('Show title', 'ilalipostfilter'),
+    'type'         => \Elementor\Controls_Manager::SWITCHER,
+    'label_on'     => esc_html__('Show', 'ilalipostfilter'),
+    'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
+    'return_value' => 'yes',
+    'default'      => 'yes',
+   ]
+  );
+
+  $this->add_control(
+   'show_date',
+   [
+    'label'        => esc_html__('Show date', 'ilalipostfilter'),
+    'type'         => \Elementor\Controls_Manager::SWITCHER,
+    'label_on'     => esc_html__('Show', 'ilalipostfilter'),
+    'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
+    'return_value' => 'yes',
+    'default'      => 'yes',
+   ]
+  );
+
+  $this->add_control(
+   'show_excerpt',
+   [
+    'label'        => esc_html__('Show excerpt', 'ilalipostfilter'),
+    'type'         => \Elementor\Controls_Manager::SWITCHER,
+    'label_on'     => esc_html__('Show', 'ilalipostfilter'),
+    'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
+    'return_value' => 'yes',
+    'default'      => 'yes',
+   ]
+  );
+
   $this->end_controls_section();
 
   // STYLES
   $this->start_controls_section(
    'style_section',
    [
-    'label' => esc_html__('Style', 'ilali-postfilter'),
+    'label' => esc_html__('Style', 'ilalipostfilter'),
     'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+   ]
+  );
+
+  $this->add_control(
+   'thumbnail_styling',
+   [
+    'label' => esc_html__('Thumbnail', 'ilalipostfilter'),
+    'type'  => \Elementor\Controls_Manager::HEADING,
+   ]
+  );
+
+  $this->add_control(
+   'thumbnail_width',
+   [
+    'label'      => esc_html__('Width', 'textdomain'),
+    'type'       => \Elementor\Controls_Manager::SLIDER,
+    'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+    'range'      => [
+     'px' => [
+      'min'  => 0,
+      'max'  => 1000,
+      'step' => 5,
+     ],
+     '%'  => [
+      'min' => 0,
+      'max' => 100,
+     ],
+    ],
+    'default'    => [
+     'unit' => '%',
+     'size' => 50,
+    ],
+    'selectors'  => [
+     '{{WRAPPER}} .post-thumbnail' => 'width: {{SIZE}}{{UNIT}};',
+    ],
+   ]
+  );
+
+  $this->add_control(
+   'thumbnail_height',
+   [
+    'label'      => esc_html__('Height', 'textdomain'),
+    'type'       => \Elementor\Controls_Manager::SLIDER,
+    'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+    'range'      => [
+     'px' => [
+      'min'  => 0,
+      'max'  => 1000,
+      'step' => 5,
+     ],
+     '%'  => [
+      'min' => 0,
+      'max' => 100,
+     ],
+    ],
+    'default'    => [
+     'unit' => '%',
+     'size' => '',
+    ],
+    'selectors'  => [
+     '{{WRAPPER}} .post-thumbnail' => 'height: {{SIZE}}{{UNIT}};',
+    ],
+   ]
+  );
+
+  $this->add_control(
+   'thumbnail_divider',
+   [
+    'type' => \Elementor\Controls_Manager::DIVIDER,
    ]
   );
 
   $this->add_control(
    'title_styling',
    [
-    'label' => esc_html__('Title', 'ilali-postfilter'),
+    'label' => esc_html__('Title', 'ilalipostfilter'),
     'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
@@ -169,7 +296,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'title_color',
    [
-    'label'     => esc_html__('Text Color', 'ilali-postfilter'),
+    'label'     => esc_html__('Text Color', 'ilalipostfilter'),
     'type'      => \Elementor\Controls_Manager::COLOR,
     'selectors' => [
      '{{WRAPPER}} .post-title' => 'color: {{VALUE}};',
@@ -180,8 +307,35 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
   $this->add_group_control(
    \Elementor\Group_Control_Typography::get_type(),
    [
-    'name'     => 'content_typography',
+    'name'     => 'title_typography',
     'selector' => '{{WRAPPER}} .post-title',
+   ]
+  );
+
+  $this->add_responsive_control(
+   'title_align',
+   [
+    'label'     => esc_html__('Alignment', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::CHOOSE,
+    'options'   => [
+     'left'   => [
+      'title' => esc_html__('Left', 'ilalipostfilter'),
+      'icon'  => 'eicon-text-align-left',
+     ],
+     'center' => [
+      'title' => esc_html__('Center', 'ilalipostfilter'),
+      'icon'  => 'eicon-text-align-center',
+     ],
+     'right'  => [
+      'title' => esc_html__('Right', 'ilalipostfilter'),
+      'icon'  => 'eicon-text-align-right',
+     ],
+    ],
+    'default'   => 'left',
+    'toggle'    => true,
+    'selectors' => [
+     '{{WRAPPER}} .post-title' => 'text-align: {{VALUE}};',
+    ],
    ]
   );
 

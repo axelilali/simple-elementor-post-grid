@@ -6,7 +6,7 @@
  * Description:     Display any post type and filter your post grid easily !
  * Author:          Axel Ilali
  * Author URI:      https://axel-ilali.com
- * Text Domain:     ilali-postfilter
+ * Text Domain:     ilalipostfilter
  * Domain Path:     /languages
  * Version:         1.0.0
  *
