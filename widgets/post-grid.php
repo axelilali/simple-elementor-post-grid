@@ -224,7 +224,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    ]
   );
 
-  $this->add_control(
+  $this->add_responsive_control(
    'thumbnail_width',
    [
     'label'      => esc_html__('Width', 'textdomain'),
@@ -243,7 +243,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
     ],
     'default'    => [
      'unit' => '%',
-     'size' => 50,
+     'size' => '',
     ],
     'selectors'  => [
      '{{WRAPPER}} .post-thumbnail' => 'width: {{SIZE}}{{UNIT}};',
@@ -251,7 +251,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    ]
   );
 
-  $this->add_control(
+  $this->add_responsive_control(
    'thumbnail_height',
    [
     'label'      => esc_html__('Height', 'textdomain'),
@@ -274,6 +274,44 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
     ],
     'selectors'  => [
      '{{WRAPPER}} .post-thumbnail' => 'height: {{SIZE}}{{UNIT}};',
+    ],
+   ]
+  );
+
+  $this->add_control(
+   'thumbnail_fit',
+   [
+    'label'     => esc_html__('Image fit', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::SELECT,
+    'default'   => 'none',
+    'options'   => [
+     'none'       => 'None',
+     'contain'    => 'Contain',
+     'fit'        => 'Fit',
+     'cover'      => 'Cover',
+     'scale-down' => 'Scale-down',
+    ],
+    'selectors' => [
+     '{{WRAPPER}} .post-thumbnail' => 'object-fit: {{VALUE}};',
+    ],
+   ]
+  );
+
+  $this->add_control(
+   'thumbnail-position',
+   [
+    'label'     => esc_html__('Image position', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::SELECT,
+    'default'   => 'none',
+    'options'   => [
+     'top'    => 'Top',
+     'bottom' => 'Bottom',
+     'left'   => 'Left',
+     'right'  => 'Right',
+     'center' => 'Center',
+    ],
+    'selectors' => [
+     '{{WRAPPER}} .post-thumbnail' => 'object-position: {{VALUE}};',
     ],
    ]
   );
