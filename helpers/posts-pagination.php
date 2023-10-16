@@ -54,6 +54,6 @@ function posts_pagination()
  }
 
  wp_send_json([
-  'data' => $twig->render('post-builder.twig', $context),
+  'data' => $twig->render('grid-item.twig', $context),
  ], 200);
 }

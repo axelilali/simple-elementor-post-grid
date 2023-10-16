@@ -153,7 +153,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    [
     'label'      => esc_html__('Bottom spacing', 'textdomain'),
     'type'       => \Elementor\Controls_Manager::SLIDER,
-    'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+    'size_units' => ['px', '%', 'em', 'rem'],
     'range'      => [
      'px' => [
       'min'  => 0,
@@ -266,7 +266,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    [
     'label'      => esc_html__('Width', 'textdomain'),
     'type'       => \Elementor\Controls_Manager::SLIDER,
-    'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+    'size_units' => ['px', '%', 'em', 'rem'],
     'range'      => [
      'px' => [
       'min'  => 0,
@@ -293,7 +293,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    [
     'label'      => esc_html__('Height', 'textdomain'),
     'type'       => \Elementor\Controls_Manager::SLIDER,
-    'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+    'size_units' => ['px', '%', 'em', 'rem'],
     'range'      => [
      'px' => [
       'min'  => 0,
@@ -419,7 +419,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    [
     'label'      => esc_html__('Margin', 'textdomain'),
     'type'       => \Elementor\Controls_Manager::DIMENSIONS,
-    'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+    'size_units' => ['px', '%', 'em', 'rem'],
     'selectors'  => [
      '{{WRAPPER}} .post-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
     ],
@@ -492,7 +492,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    [
     'label'      => esc_html__('Margin', 'textdomain'),
     'type'       => \Elementor\Controls_Manager::DIMENSIONS,
-    'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+    'size_units' => ['px', '%', 'em', 'rem'],
     'selectors'  => [
      '{{WRAPPER}} .post-date' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
     ],
@@ -565,9 +565,198 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    [
     'label'      => esc_html__('Margin', 'textdomain'),
     'type'       => \Elementor\Controls_Manager::DIMENSIONS,
-    'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+    'size_units' => ['px', '%', 'em', 'rem'],
     'selectors'  => [
      '{{WRAPPER}} .post-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+    ],
+   ]
+  );
+
+  $this->add_control(
+   'excerpt_divider',
+   [
+    'type' => \Elementor\Controls_Manager::DIVIDER,
+   ]
+  );
+
+  $this->add_control(
+   'pagination_styling',
+   [
+    'label' => esc_html__('Button', 'ilalipostfilter'),
+    'type'  => \Elementor\Controls_Manager::HEADING,
+   ]
+  );
+
+  $this->add_group_control(
+   \Elementor\Group_Control_Typography::get_type(),
+   [
+    'name'     => 'btn_typography',
+    'selector' => '{{WRAPPER}} .pagination-btn',
+   ]
+  );
+
+  $this->start_controls_tabs(
+   'style_tabs'
+  );
+
+  $this->start_controls_tab(
+   'style_normal_tab',
+   [
+    'label' => esc_html__('Normal', 'textdomain'),
+   ]
+  );
+
+  $this->add_control(
+   'pagination_btn_color',
+   [
+    'label'     => esc_html__('Color', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::COLOR,
+    'selectors' => [
+     '{{WRAPPER}} .pagination-btn' => 'color: {{VALUE}};',
+    ],
+   ]);
+
+  $this->add_control(
+   'pagination_btn_background',
+   [
+    'label'     => esc_html__('Background', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::COLOR,
+    'selectors' => [
+     '{{WRAPPER}} .pagination-btn' => 'background-color: {{VALUE}};',
+    ],
+   ]);
+
+  $this->add_control(
+   'pagination_btn_border',
+   [
+    'label'     => esc_html__('Border color', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::COLOR,
+    'selectors' => [
+     '{{WRAPPER}} .pagination-btn' => 'border-color: {{VALUE}};',
+    ],
+   ]);
+
+  $this->end_controls_tab();
+
+  $this->start_controls_tab(
+   'style_hover_tab',
+   [
+    'label' => esc_html__('Hover', 'textdomain'),
+   ]);
+
+  $this->add_control(
+   'pagination_btn_color_hover',
+   [
+    'label'     => esc_html__('Color', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::COLOR,
+    'selectors' => [
+     '{{WRAPPER}} .pagination-btn:hover' => 'color: {{VALUE}};',
+    ],
+   ]);
+
+  $this->add_control(
+   'pagination_btn_background_hover',
+   [
+    'label'     => esc_html__('Background', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::COLOR,
+    'selectors' => [
+     '{{WRAPPER}} .pagination-btn:hover' => 'background-color: {{VALUE}};',
+    ],
+   ]
+  );
+
+  $this->add_control(
+   'pagination_btn_border_hover',
+   [
+    'label'     => esc_html__('Border color', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::COLOR,
+    'selectors' => [
+     '{{WRAPPER}} .pagination-btn:hover' => 'border-color: {{VALUE}};',
+    ],
+   ]);
+
+  $this->end_controls_tab();
+
+  $this->end_controls_tabs();
+
+  $this->add_responsive_control(
+   'pagination_btn_padding',
+   [
+    'label'      => esc_html__('Padding', 'ilalipostfilter'),
+    'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+    'size_units' => ['px', '%', 'em', 'rem'],
+    'selectors'  => [
+     '{{WRAPPER}} .pagination-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+    ],
+   ]
+  );
+
+  $this->add_responsive_control(
+   'pagination_btn_border_width',
+   [
+    'label'      => esc_html__('Border width', 'ilalipostfilter'),
+    'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+    'size_units' => ['px', 'em', 'rem'],
+    'selectors'  => [
+     '{{WRAPPER}} .pagination-btn' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+    ],
+   ]
+  );
+
+  $this->add_control(
+   'pagination_btn_border_type',
+   [
+    'label'     => esc_html__('Border style', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::SELECT,
+    'default'   => 'solid',
+    'options'   => [
+     'solid'  => 'Solid',
+     'dotted' => "dotted",
+     'double' => "Double",
+     'dashed' => "Dashed",
+     'groove' => "Groove",
+    ],
+    'selectors' => [
+     '{{WRAPPER}} .pagination-btn' => 'border-style: {{VALUE}};',
+    ],
+   ]
+  );
+
+  $this->add_responsive_control(
+   'pagination_btn_border_radius',
+   [
+    'label'      => esc_html__('Border radius', 'ilalipostfilter'),
+    'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+    'size_units' => ['px', 'em', 'rem'],
+    'selectors'  => [
+     '{{WRAPPER}} .pagination-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+    ],
+   ]
+  );
+
+  $this->add_responsive_control(
+   'pagination_btn_position',
+   [
+    'label'     => esc_html__('Alignment', 'ilalipostfilter'),
+    'type'      => \Elementor\Controls_Manager::CHOOSE,
+    'options'   => [
+     'left'   => [
+      'title' => esc_html__('Left', 'ilalipostfilter'),
+      'icon'  => 'eicon-text-align-left',
+     ],
+     'center' => [
+      'title' => esc_html__('Center', 'ilalipostfilter'),
+      'icon'  => 'eicon-text-align-center',
+     ],
+     'right'  => [
+      'title' => esc_html__('Right', 'ilalipostfilter'),
+      'icon'  => 'eicon-text-align-right',
+     ],
+    ],
+    'default'   => 'left',
+    'toggle'    => true,
+    'selectors' => [
+     '{{WRAPPER}} .pagination-btn-container' => 'text-align: {{VALUE}};',
     ],
    ]
   );
