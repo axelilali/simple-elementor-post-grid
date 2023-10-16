@@ -320,7 +320,7 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    [
     'label'     => esc_html__('Image fit', 'ilalipostfilter'),
     'type'      => \Elementor\Controls_Manager::SELECT,
-    'default'   => 'none',
+    'default'   => 'cover',
     'options'   => [
      'none'       => 'None',
      'contain'    => 'Contain',
@@ -691,18 +691,6 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    ]
   );
 
-  $this->add_responsive_control(
-   'pagination_btn_border_width',
-   [
-    'label'      => esc_html__('Border width', 'ilalipostfilter'),
-    'type'       => \Elementor\Controls_Manager::DIMENSIONS,
-    'size_units' => ['px', 'em', 'rem'],
-    'selectors'  => [
-     '{{WRAPPER}} .pagination-btn' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-    ],
-   ]
-  );
-
   $this->add_control(
    'pagination_btn_border_type',
    [
@@ -718,6 +706,18 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
     ],
     'selectors' => [
      '{{WRAPPER}} .pagination-btn' => 'border-style: {{VALUE}};',
+    ],
+   ]
+  );
+
+  $this->add_responsive_control(
+   'pagination_btn_border_width',
+   [
+    'label'      => esc_html__('Border width', 'ilalipostfilter'),
+    'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+    'size_units' => ['px', 'em', 'rem'],
+    'selectors'  => [
+     '{{WRAPPER}} .pagination-btn' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
     ],
    ]
   );
