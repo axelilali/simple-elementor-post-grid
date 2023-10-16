@@ -16,11 +16,13 @@ function posts_pagination()
   'postOrder'     => $postOrder,
   'postsPerPage'  => $postsPerPage,
   'excerptLength' => $excerptLength,
+  'columns'       => $columns,
  ] = $_POST;
 
  // WP Query
- $context['posts'] = [];
- $query            = new WP_Query([
+ $context['posts']   = [];
+ $context['columns'] = $columns;
+ $query              = new WP_Query([
   'post_type'      => $postType,
   'posts_per_page' => $postsPerPage,
   'order'          => $postOrder,

@@ -1,24 +1,26 @@
 jQuery(function ($) {
-	$page = 2;
+	let page = 2;
 
 	$("#ilali-post-widget button").on("click", function () {
-		$siteUrl = $(this).data("site-url");
-		$postType = $(this).data("post-type");
-		$postOrder = $(this).data("post-order");
-		$postsPerPage = $(this).data("posts-per-page");
-		$excerptLength = $(this).data("excerpt-length");
+		let siteUrl = $(this).data("site-url");
+		let postType = $(this).data("post-type");
+		let postOrder = $(this).data("post-order");
+		let postsPerPage = $(this).data("posts-per-page");
+		let excerptLength = $(this).data("excerpt-length");
+		let columns = $(this).data("columns");
 
 		$.ajax({
 			method: "post",
-			url: `${$siteUrl}/wp-admin/admin-ajax.php`,
+			url: `${siteUrl}/wp-admin/admin-ajax.php`,
 			headers: {},
 			data: {
 				action: "posts_pagination",
-				page: $page,
-				postType: $postType,
-				postOrder: $postOrder,
-				postsPerPage: $postsPerPage,
-				excerptLength: $excerptLength,
+				page,
+				postType,
+				postOrder,
+				postsPerPage,
+				excerptLength,
+				columns,
 			},
 			beforeSend: function () {
 				$("#ilali-post-widget").css({
@@ -32,10 +34,14 @@ jQuery(function ($) {
 					pointerEvents: "all",
 				});
 				$("#ilali-post-widget .row").append(response.data);
-				$page++;
+				page++;
 			},
 			error: function (err) {
 				console.log(err);
+				$("#ilali-post-widget").css({
+					opacity: 1,
+					pointerEvents: "all",
+				});
 			},
 		});
 	});

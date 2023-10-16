@@ -33,8 +33,9 @@
   </div>
 
   {% if settings.show_pagination == 'yes' %}
-    <button data-site-url="{{ site_url }}" data-post-type="{{ settings.post_type }}" data-post-order="{{ settings.posts_order }}" data-posts-per-page="{{ settings.posts_per_page }}" data-excerpt-length="{{ settings.excerpt_length }}">
+    <button data-columns="{{ settings.columns }}" data-site-url="{{ site_url }}" data-post-type="{{ settings.post_type }}" data-post-order="{{ settings.posts_order }}" data-posts-per-page="{{ settings.posts_per_page }}" data-excerpt-length="{{ settings.excerpt_length }}">
       click me
+                      
                 
           
     </button>
