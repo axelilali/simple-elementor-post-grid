@@ -3,8 +3,6 @@
 //  column padding
 //  pagination button and settings
 //  post taxonomies
-// thumbnail min height
-// column bottom margin for responsive
 // global variable for text domaine
 // replace boostrap with css grid
 
@@ -150,6 +148,33 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    ]
   );
 
+  $this->add_responsive_control(
+   'column_bottom_spacing',
+   [
+    'label'      => esc_html__('Bottom spacing', 'textdomain'),
+    'type'       => \Elementor\Controls_Manager::SLIDER,
+    'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+    'range'      => [
+     'px' => [
+      'min'  => 0,
+      'max'  => 1000,
+      'step' => 5,
+     ],
+     '%'  => [
+      'min' => 0,
+      'max' => 100,
+     ],
+    ],
+    'default'    => [
+     'unit' => 'px',
+     'size' => 50,
+    ],
+    'selectors'  => [
+     '{{WRAPPER}} .column' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+    ],
+   ]
+  );
+
   $this->add_control(
    'hr_2',
    [
@@ -197,6 +222,18 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    'show_excerpt',
    [
     'label'        => esc_html__('Show excerpt', 'ilalipostfilter'),
+    'type'         => \Elementor\Controls_Manager::SWITCHER,
+    'label_on'     => esc_html__('Show', 'ilalipostfilter'),
+    'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
+    'return_value' => 'yes',
+    'default'      => 'yes',
+   ]
+  );
+
+  $this->add_control(
+   'show_pagination',
+   [
+    'label'        => esc_html__('Enable pagination', 'ilalipostfilter'),
     'type'         => \Elementor\Controls_Manager::SWITCHER,
     'label_on'     => esc_html__('Show', 'ilalipostfilter'),
     'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
@@ -542,9 +579,9 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
  protected function render()
  {
   global $twig;
-  global $wpdb;
 
   $settings             = $this->get_settings_for_display();
+  $context['site_url']  = site_url();
   $context['widget_id'] = str_replace(".", "", $this->get_unique_selector());
   $context['settings']  = $settings;
 

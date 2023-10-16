@@ -13,18 +13,20 @@
  * @package         Ilali_Postfilter
  */
 
+require_once __DIR__ . '/helpers/posts-pagination.php';
+
 //  register scripts and styles
 function elementor_post_grid_widgets_dependencies()
 {
-
+ wp_register_script('post-grid', plugins_url('assets/js/main.js', __FILE__), [], null, true);
  wp_register_style('bootstrap-grid', plugins_url('libs/bootstrap/bootstrap-grid.min.css', __FILE__), null, 'all');
 }
 add_action('wp_enqueue_scripts', 'elementor_post_grid_widgets_dependencies');
 
 function enqueue_style()
 {
+ wp_enqueue_script('post-grid');
  wp_enqueue_style('bootstrap-grid');
-
 }
 add_action('wp_enqueue_scripts', 'enqueue_style');
 
