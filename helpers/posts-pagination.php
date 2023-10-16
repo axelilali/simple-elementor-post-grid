@@ -17,12 +17,21 @@ function posts_pagination()
   'postsPerPage'  => $postsPerPage,
   'excerptLength' => $excerptLength,
   'columns'       => $columns,
+  'thumbnail'     => $thumbnail,
+  'date'          => $date,
+  'title'         => $title,
+  'excerpt'       => $excerpt,
  ] = $_POST;
 
  // WP Query
- $context['posts']   = [];
- $context['columns'] = $columns;
- $query              = new WP_Query([
+ $context['posts']          = [];
+ $context['columns']        = $columns;
+ $context['show_thumbnail'] = $thumbnail;
+ $context['show_title']     = $title;
+ $context['show_date']      = $date;
+ $context['show_excerpt']   = $excerpt;
+
+ $query = new WP_Query([
   'post_type'      => $postType,
   'posts_per_page' => $postsPerPage,
   'order'          => $postOrder,

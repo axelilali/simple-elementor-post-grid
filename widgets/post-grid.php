@@ -608,6 +608,8 @@ class Ilali_PostGrid extends \Elementor\Widget_Base
    endwhile;
   }
 
+  $context['max_pages'] = $query->max_num_pages;
+
   echo $twig->render('post-grid.twig', $context);
  }
 

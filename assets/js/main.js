@@ -7,7 +7,15 @@ jQuery(function ($) {
 		let postOrder = $(this).data("post-order");
 		let postsPerPage = $(this).data("posts-per-page");
 		let excerptLength = $(this).data("excerpt-length");
+		let maxPages = $(this).data("max-pages");
+
+		console.log(maxPages);
+
 		let columns = $(this).data("columns");
+		let thumbnail = $(this).data("thumbnail");
+		let title = $(this).data("title");
+		let date = $(this).data("date");
+		let excerpt = $(this).data("excerpt");
 
 		$.ajax({
 			method: "post",
@@ -21,6 +29,10 @@ jQuery(function ($) {
 				postsPerPage,
 				excerptLength,
 				columns,
+				thumbnail,
+				title,
+				date,
+				excerpt,
 			},
 			beforeSend: function () {
 				$("#ilali-post-widget").css({
@@ -33,8 +45,13 @@ jQuery(function ($) {
 					opacity: 1,
 					pointerEvents: "all",
 				});
+
 				$("#ilali-post-widget .row").append(response.data);
 				page++;
+
+				if (page >= maxPages) {
+					$("#ilali-post-widget button").hide();
+				}
 			},
 			error: function (err) {
 				console.log(err);
