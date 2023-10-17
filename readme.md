@@ -1,11 +1,11 @@
 # Simple Elementor Post Grid
-Contributors: Axel Ilali
-Tags: Elementor, Post, Grid, Wordpress, Widget
-Requires at least: 5.8
-Tested up to: 6.3
-Requires PHP: 7.4
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+* Contributors: Axel Ilali
+* Tags: Elementor, Post, Grid, Wordpress, Widget
+* Requires at least: 5.8
+* Tested up to: 6.3
+* Requires PHP: 7.4
+* License: GPLv2 or later
+* License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 The plugin allow users to display any post types in a grid like fashion and give users the capability to filter those posts.
 

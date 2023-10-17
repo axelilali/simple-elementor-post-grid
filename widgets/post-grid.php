@@ -1,21 +1,15 @@
 <?php
-// TODO:
-//  column padding
-//  pagination button and settings
-//  post taxonomies
-// global variable for text domaine
-// replace boostrap with css grid
 
 require_once dirname(__DIR__) . '/bootstrap.php';
 require_once dirname(__DIR__) . '/helpers/truncate.php';
 
-class IlaliSimplePostGrid extends \Elementor\Widget_Base
+class SimpleElementorPostGrid extends \Elementor\Widget_Base
 
 {
 
  public function get_name()
  {
-  return 'ilali-postgrid';
+  return 'simple-elementor-post-grid';
  }
 
  public function get_title()
@@ -35,7 +29,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
 
  public function get_keywords()
  {
-  return ['post', 'filter', 'grid'];
+  return ['post', 'grid'];
  }
 
  protected function register_controls()
@@ -44,9 +38,11 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
 // Get all post types
   $post_types           = get_post_types(array(), 'objects');
   $available_post_types = [];
+
 // Filter out post types without the 'post' capability
   $filtered_post_types = array_filter($post_types, function ($post_type) {
-   return post_type_supports($post_type->name, 'editor'); // Check if the post type supports the 'editor' capability
+   // Check if the post type supports the 'editor' capability
+   return post_type_supports($post_type->name, 'editor');
   });
 
 // Output the list of post types
@@ -58,7 +54,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->start_controls_section(
    'content_section',
    [
-    'label' => esc_html__('Content', 'ilali-simple-elementor-post-grid'),
+    'label' => esc_html__('Content', 'simple-elementor-post-grid'),
     'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
    ]
   );
@@ -66,7 +62,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'query',
    [
-    'label' => esc_html__('Query', 'ilali-simple-elementor-post-grid'),
+    'label' => esc_html__('Query', 'simple-elementor-post-grid'),
     'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
@@ -74,7 +70,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'post_type',
    [
-    'label'   => esc_html__('Source', 'ilali-simple-elementor-post-grid'),
+    'label'   => esc_html__('Source', 'simple-elementor-post-grid'),
     'type'    => \Elementor\Controls_Manager::SELECT,
     'default' => '',
     'options' => $available_post_types,
@@ -84,7 +80,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'posts_per_page',
    [
-    'label'   => esc_html__('Posts per page', 'ilali-simple-elementor-post-grid'),
+    'label'   => esc_html__('Posts per page', 'simple-elementor-post-grid'),
     'type'    => \Elementor\Controls_Manager::NUMBER,
     'min'     => 1,
     'max'     => 12,
@@ -96,7 +92,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'posts_order',
    [
-    'label'   => esc_html__('Post order', 'ilali-simple-elementor-post-grid'),
+    'label'   => esc_html__('Post order', 'simple-elementor-post-grid'),
     'type'    => \Elementor\Controls_Manager::SELECT,
     'default' => 'desc',
     'options' => [
@@ -116,7 +112,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'settings',
    [
-    'label' => esc_html__('Settings', 'ilali-simple-elementor-post-grid'),
+    'label' => esc_html__('Settings', 'simple-elementor-post-grid'),
     'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
@@ -124,7 +120,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'columns',
    [
-    'label'   => esc_html__('Grid columns', 'ilali-simple-elementor-post-grid'),
+    'label'   => esc_html__('Grid columns', 'simple-elementor-post-grid'),
     'type'    => \Elementor\Controls_Manager::SELECT,
     'default' => 3,
     'options' => [
@@ -139,7 +135,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'excerpt_length',
    [
-    'label'   => esc_html__('Excerpt length', 'ilali-simple-elementor-post-grid'),
+    'label'   => esc_html__('Excerpt length', 'simple-elementor-post-grid'),
     'type'    => \Elementor\Controls_Manager::NUMBER,
     'min'     => 5,
     'max'     => 200,
@@ -151,7 +147,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'column_bottom_spacing',
    [
-    'label'      => esc_html__('Bottom spacing', 'ilali-simple-elementor-post-grid'),
+    'label'      => esc_html__('Bottom spacing', 'simple-elementor-post-grid'),
     'type'       => \Elementor\Controls_Manager::SLIDER,
     'size_units' => ['px', '%', 'em', 'rem'],
     'range'      => [
@@ -197,7 +193,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'show_title',
    [
-    'label'        => esc_html__('Show title', 'ilali-simple-elementor-post-grid'),
+    'label'        => esc_html__('Show title', 'simple-elementor-post-grid'),
     'type'         => \Elementor\Controls_Manager::SWITCHER,
     'label_on'     => esc_html__('Show', 'ilalipostfilter'),
     'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
@@ -209,7 +205,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'show_date',
    [
-    'label'        => esc_html__('Show date', 'ilali-simple-elementor-post-grid'),
+    'label'        => esc_html__('Show date', 'simple-elementor-post-grid'),
     'type'         => \Elementor\Controls_Manager::SWITCHER,
     'label_on'     => esc_html__('Show', 'ilalipostfilter'),
     'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
@@ -221,7 +217,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'show_excerpt',
    [
-    'label'        => esc_html__('Show excerpt', 'ilali-simple-elementor-post-grid'),
+    'label'        => esc_html__('Show excerpt', 'simple-elementor-post-grid'),
     'type'         => \Elementor\Controls_Manager::SWITCHER,
     'label_on'     => esc_html__('Show', 'ilalipostfilter'),
     'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
@@ -233,7 +229,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'show_pagination',
    [
-    'label'        => esc_html__('Enable pagination', 'ilali-simple-elementor-post-grid'),
+    'label'        => esc_html__('Enable pagination', 'simple-elementor-post-grid'),
     'type'         => \Elementor\Controls_Manager::SWITCHER,
     'label_on'     => esc_html__('Show', 'ilalipostfilter'),
     'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
@@ -248,7 +244,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->start_controls_section(
    'style_section',
    [
-    'label' => esc_html__('Style', 'ilali-simple-elementor-post-grid'),
+    'label' => esc_html__('Style', 'simple-elementor-post-grid'),
     'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
    ]
   );
@@ -256,7 +252,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'thumbnail_styling',
    [
-    'label' => esc_html__('Thumbnail', 'ilali-simple-elementor-post-grid'),
+    'label' => esc_html__('Thumbnail', 'simple-elementor-post-grid'),
     'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
@@ -264,7 +260,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'thumbnail_width',
    [
-    'label'      => esc_html__('Width', 'ilali-simple-elementor-post-grid'),
+    'label'      => esc_html__('Width', 'simple-elementor-post-grid'),
     'type'       => \Elementor\Controls_Manager::SLIDER,
     'size_units' => ['px', '%', 'em', 'rem'],
     'range'      => [
@@ -291,7 +287,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'thumbnail_height',
    [
-    'label'      => esc_html__('Height', 'ilali-simple-elementor-post-grid'),
+    'label'      => esc_html__('Height', 'simple-elementor-post-grid'),
     'type'       => \Elementor\Controls_Manager::SLIDER,
     'size_units' => ['px', '%', 'em', 'rem'],
     'range'      => [
@@ -318,7 +314,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'thumbnail_fit',
    [
-    'label'     => esc_html__('Image fit', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Image fit', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::SELECT,
     'default'   => 'cover',
     'options'   => [
@@ -337,7 +333,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'thumbnail-position',
    [
-    'label'     => esc_html__('Image position', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Image position', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::SELECT,
     'default'   => 'none',
     'options'   => [
@@ -363,7 +359,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'title_styling',
    [
-    'label' => esc_html__('Title', 'ilali-simple-elementor-post-grid'),
+    'label' => esc_html__('Title', 'simple-elementor-post-grid'),
     'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
@@ -371,7 +367,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'title_color',
    [
-    'label'     => esc_html__('Text Color', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Text Color', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::COLOR,
     'selectors' => [
      '{{WRAPPER}} .post-title' => 'color: {{VALUE}};',
@@ -390,19 +386,19 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'title_align',
    [
-    'label'     => esc_html__('Alignment', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Alignment', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::CHOOSE,
     'options'   => [
      'left'   => [
-      'title' => esc_html__('Left', 'ilali-simple-elementor-post-grid'),
+      'title' => esc_html__('Left', 'simple-elementor-post-grid'),
       'icon'  => 'eicon-text-align-left',
      ],
      'center' => [
-      'title' => esc_html__('Center', 'ilali-simple-elementor-post-grid'),
+      'title' => esc_html__('Center', 'simple-elementor-post-grid'),
       'icon'  => 'eicon-text-align-center',
      ],
      'right'  => [
-      'title' => esc_html__('Right', 'ilali-simple-elementor-post-grid'),
+      'title' => esc_html__('Right', 'simple-elementor-post-grid'),
       'icon'  => 'eicon-text-align-right',
      ],
     ],
@@ -417,7 +413,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'title_margin',
    [
-    'label'      => esc_html__('Margin', 'ilali-simple-elementor-post-grid'),
+    'label'      => esc_html__('Margin', 'simple-elementor-post-grid'),
     'type'       => \Elementor\Controls_Manager::DIMENSIONS,
     'size_units' => ['px', '%', 'em', 'rem'],
     'selectors'  => [
@@ -436,7 +432,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'date_styling',
    [
-    'label' => esc_html__('Date', 'ilali-simple-elementor-post-grid'),
+    'label' => esc_html__('Date', 'simple-elementor-post-grid'),
     'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
@@ -444,7 +440,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'date_color',
    [
-    'label'     => esc_html__('Date color', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Date color', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::COLOR,
     'selectors' => [
      '{{WRAPPER}} .post-date' => 'color: {{VALUE}};',
@@ -463,19 +459,19 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'date_align',
    [
-    'label'     => esc_html__('Alignment', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Alignment', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::CHOOSE,
     'options'   => [
      'left'   => [
-      'title' => esc_html__('Left', 'ilali-simple-elementor-post-grid'),
+      'title' => esc_html__('Left', 'simple-elementor-post-grid'),
       'icon'  => 'eicon-text-align-left',
      ],
      'center' => [
-      'title' => esc_html__('Center', 'ilali-simple-elementor-post-grid'),
+      'title' => esc_html__('Center', 'simple-elementor-post-grid'),
       'icon'  => 'eicon-text-align-center',
      ],
      'right'  => [
-      'title' => esc_html__('Right', 'ilali-simple-elementor-post-grid'),
+      'title' => esc_html__('Right', 'simple-elementor-post-grid'),
       'icon'  => 'eicon-text-align-right',
      ],
     ],
@@ -490,7 +486,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'date_margin',
    [
-    'label'      => esc_html__('Margin', 'ilali-simple-elementor-post-grid'),
+    'label'      => esc_html__('Margin', 'simple-elementor-post-grid'),
     'type'       => \Elementor\Controls_Manager::DIMENSIONS,
     'size_units' => ['px', '%', 'em', 'rem'],
     'selectors'  => [
@@ -509,7 +505,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'excerpt_styling',
    [
-    'label' => esc_html__('Except', 'ilali-simple-elementor-post-grid'),
+    'label' => esc_html__('Except', 'simple-elementor-post-grid'),
     'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
@@ -517,7 +513,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'excerpt_color',
    [
-    'label'     => esc_html__('Excerpt color', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Excerpt color', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::COLOR,
     'selectors' => [
      '{{WRAPPER}} .post-content' => 'color: {{VALUE}};',
@@ -536,19 +532,19 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'excerpt_align',
    [
-    'label'     => esc_html__('Alignment', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Alignment', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::CHOOSE,
     'options'   => [
      'left'   => [
-      'title' => esc_html__('Left', 'ilali-simple-elementor-post-grid'),
+      'title' => esc_html__('Left', 'simple-elementor-post-grid'),
       'icon'  => 'eicon-text-align-left',
      ],
      'center' => [
-      'title' => esc_html__('Center', 'ilali-simple-elementor-post-grid'),
+      'title' => esc_html__('Center', 'simple-elementor-post-grid'),
       'icon'  => 'eicon-text-align-center',
      ],
      'right'  => [
-      'title' => esc_html__('Right', 'ilali-simple-elementor-post-grid'),
+      'title' => esc_html__('Right', 'simple-elementor-post-grid'),
       'icon'  => 'eicon-text-align-right',
      ],
     ],
@@ -563,7 +559,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'excerpt_margin',
    [
-    'label'      => esc_html__('Margin', 'ilali-simple-elementor-post-grid'),
+    'label'      => esc_html__('Margin', 'simple-elementor-post-grid'),
     'type'       => \Elementor\Controls_Manager::DIMENSIONS,
     'size_units' => ['px', '%', 'em', 'rem'],
     'selectors'  => [
@@ -582,7 +578,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'pagination_styling',
    [
-    'label' => esc_html__('Button', 'ilali-simple-elementor-post-grid'),
+    'label' => esc_html__('Button', 'simple-elementor-post-grid'),
     'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
@@ -602,14 +598,14 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->start_controls_tab(
    'style_normal_tab',
    [
-    'label' => esc_html__('Normal', 'ilali-simple-elementor-post-grid'),
+    'label' => esc_html__('Normal', 'simple-elementor-post-grid'),
    ]
   );
 
   $this->add_control(
    'pagination_btn_color',
    [
-    'label'     => esc_html__('Color', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Color', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::COLOR,
     'selectors' => [
      '{{WRAPPER}} .pagination-btn' => 'color: {{VALUE}};',
@@ -619,7 +615,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'pagination_btn_background',
    [
-    'label'     => esc_html__('Background', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Background', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::COLOR,
     'selectors' => [
      '{{WRAPPER}} .pagination-btn' => 'background-color: {{VALUE}};',
@@ -629,7 +625,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'pagination_btn_border',
    [
-    'label'     => esc_html__('Border color', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Border color', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::COLOR,
     'selectors' => [
      '{{WRAPPER}} .pagination-btn' => 'border-color: {{VALUE}};',
@@ -641,13 +637,13 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->start_controls_tab(
    'style_hover_tab',
    [
-    'label' => esc_html__('Hover', 'ilali-simple-elementor-post-grid'),
+    'label' => esc_html__('Hover', 'simple-elementor-post-grid'),
    ]);
 
   $this->add_control(
    'pagination_btn_color_hover',
    [
-    'label'     => esc_html__('Color', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Color', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::COLOR,
     'selectors' => [
      '{{WRAPPER}} .pagination-btn:hover' => 'color: {{VALUE}};',
@@ -657,7 +653,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'pagination_btn_background_hover',
    [
-    'label'     => esc_html__('Background', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Background', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::COLOR,
     'selectors' => [
      '{{WRAPPER}} .pagination-btn:hover' => 'background-color: {{VALUE}};',
@@ -668,7 +664,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'pagination_btn_border_hover',
    [
-    'label'     => esc_html__('Border color', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Border color', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::COLOR,
     'selectors' => [
      '{{WRAPPER}} .pagination-btn:hover' => 'border-color: {{VALUE}};',
@@ -682,7 +678,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'pagination_btn_padding',
    [
-    'label'      => esc_html__('Padding', 'ilali-simple-elementor-post-grid'),
+    'label'      => esc_html__('Padding', 'simple-elementor-post-grid'),
     'type'       => \Elementor\Controls_Manager::DIMENSIONS,
     'size_units' => ['px', '%', 'em', 'rem'],
     'selectors'  => [
@@ -694,7 +690,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'pagination_btn_border_type',
    [
-    'label'     => esc_html__('Border style', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Border style', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::SELECT,
     'default'   => 'solid',
     'options'   => [
@@ -713,7 +709,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'pagination_btn_border_width',
    [
-    'label'      => esc_html__('Border width', 'ilali-simple-elementor-post-grid'),
+    'label'      => esc_html__('Border width', 'simple-elementor-post-grid'),
     'type'       => \Elementor\Controls_Manager::DIMENSIONS,
     'size_units' => ['px', 'em', 'rem'],
     'selectors'  => [
@@ -725,7 +721,7 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'pagination_btn_border_radius',
    [
-    'label'      => esc_html__('Border radius', 'ilali-simple-elementor-post-grid'),
+    'label'      => esc_html__('Border radius', 'simple-elementor-post-grid'),
     'type'       => \Elementor\Controls_Manager::DIMENSIONS,
     'size_units' => ['px', 'em', 'rem'],
     'selectors'  => [
@@ -737,19 +733,19 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
   $this->add_responsive_control(
    'pagination_btn_position',
    [
-    'label'     => esc_html__('Alignment', 'ilali-simple-elementor-post-grid'),
+    'label'     => esc_html__('Alignment', 'simple-elementor-post-grid'),
     'type'      => \Elementor\Controls_Manager::CHOOSE,
     'options'   => [
      'left'   => [
-      'title' => esc_html__('Left', 'ilali-simple-elementor-post-grid'),
+      'title' => esc_html__('Left', 'simple-elementor-post-grid'),
       'icon'  => 'eicon-text-align-left',
      ],
      'center' => [
-      'title' => esc_html__('Center', 'ilali-simple-elementor-post-grid'),
+      'title' => esc_html__('Center', 'simple-elementor-post-grid'),
       'icon'  => 'eicon-text-align-center',
      ],
      'right'  => [
-      'title' => esc_html__('Right', 'ilali-simple-elementor-post-grid'),
+      'title' => esc_html__('Right', 'simple-elementor-post-grid'),
       'icon'  => 'eicon-text-align-right',
      ],
     ],
@@ -803,7 +799,5 @@ class IlaliSimplePostGrid extends \Elementor\Widget_Base
  }
 
  protected function content_template()
- {
- }
-
+ {}
 }
