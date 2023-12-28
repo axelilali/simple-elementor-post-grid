@@ -5,7 +5,7 @@
 			<div class=" column col-lg-{{ settings.columns }} ">
 
 				{% if settings.show_thumbnail == 'yes' %}
-					<img class="post-thumbnail" src="{{ post.thumbnail }}" alt="" srcset=""/>
+					<img class="post-thumbnail" src="{{ post.thumbnail }}" alt="thumbnail"/>
 				{% endif %}
 
 				{% if settings.show_title == 'yes' %}
@@ -35,7 +35,7 @@
 	{% if settings.show_pagination == 'yes' and max_pages > settings.posts_per_page %}
 		<div class="pagination-btn-container">
 			<button class="pagination-btn" data-max-pages="{{ max_pages }}" data-thumbnail="{{ settings.show_thumbnail }}" data-title="{{ settings.show_title }}" data-data="{{ settings.show_date }}" data-excerpt="{{ settings.show_excerpt }}" data-columns="{{ settings.columns }}" data-site-url="{{ site_url }}" data-post-type="{{ settings.post_type }}" data-post-order="{{ settings.posts_order }}" data-posts-per-page="{{ settings.posts_per_page }}" data-excerpt-length="{{ settings.excerpt_length }}">
-				click me
+				{{settings.button_text}}
 			</button>
 		</div>
 	{% endif %}

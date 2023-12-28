@@ -186,10 +186,10 @@ class SimpleElementorPostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'show_thumbnail',
    [
-    'label'        => esc_html__('Show thumbnail', 'ilalipostfilter'),
+    'label'        => esc_html__('Show thumbnail', 'simple-elementor-post-grid'),
     'type'         => \Elementor\Controls_Manager::SWITCHER,
-    'label_on'     => esc_html__('Show', 'ilalipostfilter'),
-    'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
+    'label_on'     => esc_html__('Show', 'simple-elementor-post-grid'),
+    'label_off'    => esc_html__('Hide', 'simple-elementor-post-grid'),
     'return_value' => 'yes',
     'default'      => 'yes',
    ]
@@ -200,8 +200,8 @@ class SimpleElementorPostGrid extends \Elementor\Widget_Base
    [
     'label'        => esc_html__('Show title', 'simple-elementor-post-grid'),
     'type'         => \Elementor\Controls_Manager::SWITCHER,
-    'label_on'     => esc_html__('Show', 'ilalipostfilter'),
-    'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
+    'label_on'     => esc_html__('Show', 'simple-elementor-post-grid'),
+    'label_off'    => esc_html__('Hide', 'simple-elementor-post-grid'),
     'return_value' => 'yes',
     'default'      => 'yes',
    ]
@@ -212,8 +212,8 @@ class SimpleElementorPostGrid extends \Elementor\Widget_Base
    [
     'label'        => esc_html__('Show date', 'simple-elementor-post-grid'),
     'type'         => \Elementor\Controls_Manager::SWITCHER,
-    'label_on'     => esc_html__('Show', 'ilalipostfilter'),
-    'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
+    'label_on'     => esc_html__('Show', 'simple-elementor-post-grid'),
+    'label_off'    => esc_html__('Hide', 'simple-elementor-post-grid'),
     'return_value' => 'yes',
     'default'      => 'yes',
    ]
@@ -224,8 +224,8 @@ class SimpleElementorPostGrid extends \Elementor\Widget_Base
    [
     'label'        => esc_html__('Show excerpt', 'simple-elementor-post-grid'),
     'type'         => \Elementor\Controls_Manager::SWITCHER,
-    'label_on'     => esc_html__('Show', 'ilalipostfilter'),
-    'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
+    'label_on'     => esc_html__('Show', 'simple-elementor-post-grid'),
+    'label_off'    => esc_html__('Hide', 'simple-elementor-post-grid'),
     'return_value' => 'yes',
     'default'      => 'yes',
    ]
@@ -236,10 +236,26 @@ class SimpleElementorPostGrid extends \Elementor\Widget_Base
    [
     'label'        => esc_html__('Enable pagination', 'simple-elementor-post-grid'),
     'type'         => \Elementor\Controls_Manager::SWITCHER,
-    'label_on'     => esc_html__('Show', 'ilalipostfilter'),
-    'label_off'    => esc_html__('Hide', 'ilalipostfilter'),
+    'label_on'     => esc_html__('Show', 'simple-elementor-post-grid'),
+    'label_off'    => esc_html__('Hide', 'simple-elementor-post-grid'),
     'return_value' => 'yes',
     'default'      => 'yes',
+   ]
+  );
+
+  $this->add_control(
+   'hr_3',
+   [
+    'type' => \Elementor\Controls_Manager::DIVIDER,
+   ]
+  );
+
+  $this->add_control(
+   'button_text',
+   [
+    'label'   => esc_html__('Button text', 'simple-elementor-post-grid'),
+    'type'    => \Elementor\Controls_Manager::TEXT,
+    'default' => 'Load More',
    ]
   );
 
