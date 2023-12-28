@@ -1,6 +1,11 @@
 <?php
 // Exit if accessed directly
 
+if (!defined('ABSPATH')) {
+ exit;
+}
+// Exit if accessed directly
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Twig\Environment;
