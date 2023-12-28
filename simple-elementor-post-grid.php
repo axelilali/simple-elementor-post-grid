@@ -8,7 +8,7 @@
  * Author:          Axel Ilali
  * Author URI:      https://axel-ilali.com
  * Text Domain:     simple-elementor-post-grid
- * Version:         1.0.0
+ * Version:         1.0.1
  * Requires at least: 5.8
  * Tested up to: 6.2
  * Requires PHP: 7.3

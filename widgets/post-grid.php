@@ -510,7 +510,7 @@ class SimpleElementorPostGrid extends \Elementor\Widget_Base
   $this->add_control(
    'excerpt_styling',
    [
-    'label' => esc_html__('Except', 'simple-elementor-post-grid'),
+    'label' => esc_html__('Excerpt', 'simple-elementor-post-grid'),
     'type'  => \Elementor\Controls_Manager::HEADING,
    ]
   );
@@ -792,13 +792,30 @@ class SimpleElementorPostGrid extends \Elementor\Widget_Base
      'thumbnail'    => get_the_post_thumbnail_url(),
      'category'     => wp_get_post_terms(get_the_ID(), 'category')[0]->name,
      'categorySlug' => wp_get_post_terms(get_the_ID(), 'category')[0]->slug,
-     'content'      => limit_text(get_the_excerpt(), $settings['excerpt_length']),
+     'content'      => get_the_excerpt(),
      'date'         => get_the_date('j F Y'),
     ];
    endwhile;
   }
 
   $context['max_pages'] = $query->max_num_pages;
+
+  // Escaping late
+  $context['site_url']  = esc_url($context['site_url']);
+  $context['widget_id'] = esc_attr($context['widget_id']);
+  $context['settings']  = array_map('sanitize_text_field', $context['settings']);
+
+  foreach ($context['posts'] as &$post) {
+   $post['title']        = esc_html($post['title']);
+   $post['link']         = esc_url($post['link']);
+   $post['thumbnail']    = esc_url($post['thumbnail']);
+   $post['category']     = esc_html($post['category']);
+   $post['categorySlug'] = esc_html($post['categorySlug']);
+   $post['content']      = esc_html(limit_text($post['content'], $settings['excerpt_length']));
+   $post['date']         = esc_html($post['date']);
+  }
+
+  $context['max_pages'] = esc_attr($context['max_pages']);
 
   echo $twig->render('post-grid.twig', $context);
  }
