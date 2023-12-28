@@ -1,4 +1,6 @@
 <?php
+// Exit if accessed directly
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Twig\Environment;
@@ -9,6 +11,6 @@ global $twig;
 
 $loader = new FilesystemLoader(__DIR__ . '/templates');
 $twig   = new Environment($loader, [
-  'debug' => true,
+ 'debug' => true,
 ]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());

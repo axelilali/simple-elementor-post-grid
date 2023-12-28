@@ -15,6 +15,9 @@
  *
  * @package         SimpleElementorPostGrid
  */
+if (!defined('ABSPATH')) {
+ exit;
+}
 
 require_once __DIR__ . '/helpers/posts-pagination.php';
 

@@ -9,8 +9,6 @@ jQuery(function ($) {
 		let excerptLength = $(this).data("excerpt-length");
 		let maxPages = $(this).data("max-pages");
 
-		console.log(maxPages);
-
 		let columns = $(this).data("columns");
 		let thumbnail = $(this).data("thumbnail");
 		let title = $(this).data("title");
@@ -54,7 +52,7 @@ jQuery(function ($) {
 				}
 			},
 			error: function (err) {
-				console.log(err);
+				console.error(err);
 				$("#ilali-post-widget").css({
 					opacity: 1,
 					pointerEvents: "all",
